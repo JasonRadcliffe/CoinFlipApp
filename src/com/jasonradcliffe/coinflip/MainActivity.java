@@ -1,9 +1,12 @@
 package com.jasonradcliffe.coinflip;
 
 import android.app.Activity;
+import android.media.MediaPlayer;
+import android.media.MediaPlayer.OnCompletionListener;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -11,6 +14,9 @@ import android.widget.TextView;
 public class MainActivity extends Activity {
 	
 	private Coin coin = new Coin();
+	private TextView mAnswerText;
+	private Button mFlipButton;
+	private Button mResetButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,37 +25,32 @@ public class MainActivity extends Activity {
         
         
         //Declare view variables
-        final TextView answerText = (TextView)findViewById(R.id.answerText);
-        Button flipButton = (Button)findViewById(R.id.flipButton);
-        Button resetButton = (Button)findViewById(R.id.resetButton);
+        mAnswerText = (TextView)findViewById(R.id.answerText);
+        mFlipButton = (Button)findViewById(R.id.flipButton);
+        mResetButton = (Button)findViewById(R.id.resetButton);
         /*
         final ImageView headsImage = (ImageView)findViewById(R.id.imageView1);
         final ImageView tailsImage = (ImageView)findViewById(R.id.imageView2);
         */
         
         
-        flipButton.setOnClickListener(new View.OnClickListener() {
+        mFlipButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {				
 				String answer = coin.flip();
-				answerText.setText(answer);
-				/*
-				headsImage.setVisibility(1);
-				*/
+				mAnswerText.setText(answer);
+				animateAnswer();
+				playSound();
 				
 			}
 		});
         
         
-        resetButton.setOnClickListener(new View.OnClickListener() {
+        mResetButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
 				String empty = "";
-				answerText.setText(empty);
-				/*
-				headsImage.setVisibility(2);
-				tailsImage.setVisibility(2);
-				*/
+				mAnswerText.setText(empty);
 				
 				
 				
@@ -58,6 +59,31 @@ public class MainActivity extends Activity {
         
         
         
+    }
+    
+    
+    private void animateAnswer(){
+    	AlphaAnimation fadeInAnimation = new AlphaAnimation(0, 1);
+    	fadeInAnimation.setDuration(1500);
+    	fadeInAnimation.setFillAfter(true);
+    	mAnswerText.setAnimation(fadeInAnimation);
+    	
+    	
+    }
+    
+    private void playSound(){
+    	MediaPlayer player = MediaPlayer.create(this, R.raw.coinflip);
+    	player.start();
+    	player.setOnCompletionListener(new OnCompletionListener() {
+			
+			@Override
+			public void onCompletion(MediaPlayer mp) {
+				mp.release();
+				
+			}
+		});
+    	
+    	
     }
 
 

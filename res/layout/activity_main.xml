@@ -13,17 +13,12 @@
         android:id="@+id/imageView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
         android:scaleType="fitXY"
         android:src="@drawable/back_portrait" />
-
-    <TextView
-        android:id="@+id/answerText"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/flipButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="22dp"
-        android:textSize="32sp" />
 
     <Button
         android:id="@+id/resetButton"
@@ -40,26 +35,40 @@
         android:layout_height="wrap_content"
         android:layout_above="@+id/resetButton"
         android:layout_alignParentRight="true"
-        android:text="Flip" />
+        android:text="Flip"
+        android:textSize="32sp"
+        android:textStyle="italic|bold"
+        android:typeface="serif"
+        android:textColor= "#103D3D"
+        />
 
-    <!--  
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="100dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:src="@drawable/heads2"
-        android:visibility="invisible" />
+        android:layout_above="@+id/flipButton"
+        android:layout_alignLeft="@+id/imageView1"
+        android:layout_marginBottom="57dp"
+        android:weightSum="1" >
 
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="100dp"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:src="@drawable/tails2"
-        android:visibility="invisible" />
-        -->
+        <View
+            android:id="@+id/view1"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight=".2" />
+
+        <TextView
+            android:id="@+id/answerText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".6"
+            android:gravity="center_horizontal"
+            android:textSize="32sp"/>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight=".2" />
+    </LinearLayout>
 
 </RelativeLayout>
